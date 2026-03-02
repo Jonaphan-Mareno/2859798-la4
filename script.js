@@ -19,17 +19,28 @@ async function searchCountry(countryName) {
     <p><strong>Population:</strong> ${data[0].population.toLocaleString()}</p>
     <p><strong>Region:</strong> ${data[0].region}</p>
     <img src="${data[0].flags.svg}" alt="${data[0].name.common} flag">
-`;test.textContent=data[0].borders;
+`;
         // Fetch bordering countries
-        for(let i=0;i<data[0].borders.length();i++){       
+        
+        for(let i=0;i<data[0].borders.length;i++){       
         const URL2= "https://restcountries.com/v3.1/alpha/"+data[0].borders[i];
         const response2=await fetch(URL2);
         const data2=await response2.json();
-        
+         document.getElementById('bordering-countries').innerHTML += `
+    <div class="border-country">
+        <p>${data2[0].name.common}</p>
+        <img src="${data2[0].flags.svg}" alt="${data2[0].name.common} flag">
+    </div>
+`;
+   
     
     }
         // Update bordering countries section
     } catch (error) {
+        document.getElementById("country-info").innerHTML="";
+        document.getElementById("bordering-countries").innerHTML="";
+        document.getElementById("error-message").textContent="country does not exist";
+
         
     } finally {
         // Hide loading spinner
@@ -40,3 +51,8 @@ document.getElementById('search-btn').addEventListener('click', () => {
     const country = document.getElementById('country-input').value;
     searchCountry(country);
 });
+document.getElementById("country-input").addEventListener("keydown",(event)=>{
+    if(event.key==="Enter"){
+const country=document.getElementById("country-input").value;
+searchCountry(country);
+}});
