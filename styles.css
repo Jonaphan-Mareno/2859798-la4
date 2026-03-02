@@ -1,9 +1,9 @@
 .spinner {
     border-radius: 50%;
-    border:6px;
-    border-top:6px grey;
-    width:35px;
-    height:35px;
+    border:6px solid;
+    border-top:6px solid grey;
+    width:25px;
+    height:25px;
     animation: spin 1s linear infinite; /* Required */
 }
 
@@ -13,7 +13,6 @@
 }
 .country-card{
     background-color: rgb(74, 141, 197);
-    padding: 3px;
 }
 .border-grid{
     display: grid;
